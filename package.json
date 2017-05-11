@@ -1,0 +1,36 @@
+{
+  "name": "compucorp",
+  "version": "0.0.1",
+  "description": "A quick demo for compucorp on using AngularJS n SpotifyAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joehannes-jobs/compucorp.git"
+  },
+  "keywords": [
+    "angularjs",
+    "spotify",
+    "ng-harmony",
+    "inuit-css",
+    "itcss"
+  ],
+  "author": "Johannes Neugschwentner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joehannes-jobs/compucorp/issues"
+  },
+  "homepage": "https://github.com/joehannes-jobs/compucorp#readme",
+  "devDependencies": {
+    "jspm": "^0.16.53"
+  },
+  "jspm": {
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}

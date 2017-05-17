@@ -1,10 +1,9 @@
-import { Controller as Ctrl } from "ng-harmony/ng-harmony-core";
-import { Controller } from "ng-harmony/ng-harmony-decorator";
+import { Controller as Ctrl } from "ng-harmony-core";
+import { Controller } from "ng-harmony-decorator";
 
 @Controller({
 	module: "compucorp",
-	name: "LandingPageCtrl",
-	deps: ["$routeParams"]
+	name: "LandingPageCtrl"
 })
 export class LandingPageCtrl extends Ctrl {
     constructor (...args) {

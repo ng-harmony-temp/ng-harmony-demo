@@ -1,8 +1,10 @@
-import tpl from "ui/landing.html!";
+import tpl from "../ui/landing.html";
 
-var routes = [{
-    controller: "LandingPageCtrl",
-    template: "tpl"
-}];
+var routes = {
+    default: {
+        controller: "LandingPageCtrl",
+        template: tpl
+    }
+};
 
 export default routes;

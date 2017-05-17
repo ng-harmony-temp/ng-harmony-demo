@@ -9,14 +9,26 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
+            exclude: /node_modules\/(?!ng-harmony.*\/).*/,
             use: {
                 loader: "babel-loader",
                 options: {
-                    presets: ["env", "flow", "stage-0"],
-                    plugins: ["babel-plugin-syntax-class-properties", "babel-plugin-transform-decorators-legacy"]
+                    presets: ["env", "es2017", "flow", "stage-0"],
+                    plugins: [
+                        "transform-decorators-legacy",
+                        "transform-class-properties"
+                    ]
                 }
             }
+        },
+        {
+            test: /\.html$/,
+            use: [{
+                loader: "html-loader",
+                options: {
+                    minimize: true
+                }
+            }]
         }]
     }
 };

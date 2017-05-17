@@ -1,3 +1,5 @@
+import "../assets/styles/main.scss";
+
 import module from "./module";
 import routes from "./routes";
 

@@ -1,0 +1,50 @@
+#designer-logo, #powered-by, #hero-unit, #start {
+    position: absolute;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+#designer-logo {
+    width: 100px;
+    height: 100px;
+}
+#powered-by {
+    display: inline;
+    right: 0;
+    text-align: right;
+}
+#hero-unit {
+    top: 75px;
+    left: 50px;
+    width: calc(100% - 100px);
+    height: calc(100% - 150px);
+
+}
+#start {
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+
+@include mq($from: mobile, $until: desktop) {
+    #designer-logo {
+        background-image: url("../../assets/images/gl-logo_1x.png");
+    }
+    #hero-unit {
+        background-image: url("../../assets/images/hero-img_1x.png");
+    }
+    #start {
+        background-image: url("../../assets/images/page1_1x.png");
+    }
+}
+@include mq($from: desktop) {
+    #designer-logo {
+        background-image: url("../../assets/images/gl-logo_2x.png");
+    }
+    #hero-unit {
+        background-image: url("../../assets/images/hero-img_2x.png");
+    }
+    #start {
+        background-image: url("../../assets/images/page1_2x.png");
+    }
+}

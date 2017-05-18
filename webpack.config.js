@@ -41,6 +41,15 @@ module.exports = {
                     includePaths: ["/node_modules/inuitcss"]
                 }
             }]
+        }, {
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            loaders: [
+                "file-loader?hash=sha512&digest=hex&name=[hash].[ext]",
+                "image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false"
+            ]
+        }, {
+            test: /\.(eot|svg|ttf|woff|woff2)$/,
+            loader: "file-loader?name=dist/fonts/[name].[ext]"
         }]
     }
 };

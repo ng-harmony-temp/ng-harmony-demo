@@ -11,7 +11,7 @@
       <style>[ng-cloak] { display: none; }</style>
       <base href="/">
   </head>
-  <body ng-app="compucorp">
+  <body ng-cloak ng-app="compucorp">
 
     <noscript>
       <div class="deprecation-warning">
@@ -21,9 +21,9 @@
       </div>
     </noscript>
 
-    <div ng-view></div>
+    <main ng-view></main>
 
-    <script src="dist/bundle.js"></script>
+    <script src="bundle.js"></script>
 
   </body>
 </html>

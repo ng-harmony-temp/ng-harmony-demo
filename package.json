@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "flow": "node_modules/.bin/flow",
-    "build": "node_modules/.bin/webpack",
-    "serve": "npm run build && cp index.html ./dist/ && node_modules/.bin/http-server dist"
+    "build": "node_modules/.bin/webpack && cp index.html ./dist",
+    "serve": "node_modules/.bin/http-server dist",
+    "start": "npm run build && npm run serve"
   },
   "repository": {
     "type": "git",

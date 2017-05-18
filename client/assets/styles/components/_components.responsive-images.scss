@@ -30,6 +30,7 @@
     #start {
         background-image: url("../../assets/images/page1_1x.png");
         height: 32px;
+        width: 32px;
     }
 }
 @include mq($from: tablet) {
@@ -48,5 +49,6 @@
     #start {
         background-image: url("../../assets/images/page1_2x.png");
         height: 64px;
+        width: 64px;
     }
 }

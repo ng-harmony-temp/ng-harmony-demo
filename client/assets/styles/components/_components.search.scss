@@ -1,0 +1,33 @@
+header#search {
+	background-color: rgb(51, 52, 65);
+	
+	&> button {
+		margin-left: -2em;
+		line-height: 2.4em;
+		border-radius: 33px;
+		border: .26em solid white;
+		background-color: rgb(198, 67, 120);
+		&:hover { background-color: rgb(215, 75, 130); }
+		&:active { background-color: rgb(150, 40, 70); }
+		color: white;
+	}
+}
+
+@include mq($until: tablet) {
+	header#search > input {
+		margin-bottom: $inuit-global-spacing-unit-medium;
+		padding-right: $inuit-global-spacing-unit-medium !important;
+	}
+	header#search > button {
+		border: none;
+		padding-left: $inuit-global-spacing-unit-large !important;
+		padding-right: $inuit-global-spacing-unit-large !important;
+	}
+
+}
+@include mq($from: tablet) {
+	header#search > input {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}

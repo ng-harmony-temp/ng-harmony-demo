@@ -141,6 +141,7 @@
 // Build and include your project’s UI Compoments here.
 @import "components/components.buttons";
 @import "components/components.responsive-images";
+@import "components/components.search";
 
 
 
@@ -156,3 +157,4 @@ $inuit-offsets: true;
 //@import "node_modules/inuitcss/utilities/utilities.responsive-spacings";
 @import "node_modules/inuitcss/utilities/utilities.print";
 @import "node_modules/inuitcss/utilities/utilities.hide";
+@import "utilities/utilities.spacing";

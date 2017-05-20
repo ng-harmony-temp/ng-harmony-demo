@@ -1,0 +1,14 @@
+.u-visible {
+	display: inherit !important;
+}
+@include mq($until: tablet) {
+	.u-visible__tablet {
+		transform: rotateY(180deg);
+		transform-origin: top 50%;
+		backface-visibility: hidden;
+		opacity: 0;
+	}
+}
+.u-transparency-medium {
+	opacity: .5;
+}

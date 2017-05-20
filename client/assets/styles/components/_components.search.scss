@@ -12,6 +12,25 @@ header#search {
 		color: white;
 	}
 }
+main#results {
+	background-color: rgb(56, 58, 73);
+	height: calc(100% - #{4 * $inuit-global-spacing-unit-medium} - 3em - #{$inuit-global-line-height});
+	transition: 500ms all linear;
+	&> section#results_landing {
+		transition: 200ms all linear;
+		&> h3 {
+			font-family: RalewayExtraLight; 
+			color: grey;
+		}
+	}
+}
+footer#copyright {
+	position: absolute;
+	width: 100%;
+	background-color: rgb(51, 52, 65);
+	transition: 500ms all ease-in;
+	bottom: 0;
+}
 
 @include mq($until: tablet) {
 	header#search > input {
@@ -23,11 +42,28 @@ header#search {
 		padding-left: $inuit-global-spacing-unit-large !important;
 		padding-right: $inuit-global-spacing-unit-large !important;
 	}
-
+	footer#copyright > q {
+		display: block;
+		&:before, &:after { content: ""; }
+	}
+	main#results {
+		background-color: rgb(51, 52, 65);
+	}
 }
 @include mq($from: tablet) {
 	header#search > input {
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
+	}
+	footer#copyright > q {
+		display: inline;
+		&:first-child { 
+			&:before { content: open-quote }
+			&:after { content: " - "; }
+		}
+		&:last-child {
+			&:before { content: ""; }
+			&:after { content: close-quote; }
+		}
 	}
 }

@@ -2,7 +2,6 @@ header#search {
 	background-color: rgb(51, 52, 65);
 	
 	&> button {
-		margin-left: -2em;
 		line-height: 2.4em;
 		border-radius: 33px;
 		border: .26em solid white;
@@ -33,14 +32,16 @@ footer#copyright {
 }
 
 @include mq($until: tablet) {
-	header#search > input {
-		margin-bottom: $inuit-global-spacing-unit-medium;
-		padding-right: $inuit-global-spacing-unit-medium !important;
-	}
-	header#search > button {
-		border: none;
-		padding-left: $inuit-global-spacing-unit-large !important;
-		padding-right: $inuit-global-spacing-unit-large !important;
+	header#search  {
+		&> input {
+			margin-bottom: $inuit-global-spacing-unit-medium;
+			padding-right: $inuit-global-spacing-unit-medium !important;
+		}
+		&> button {
+			border: none;
+			padding-left: $inuit-global-spacing-unit-large !important;
+			padding-right: $inuit-global-spacing-unit-large !important;
+		}
 	}
 	footer#copyright > q {
 		display: block;
@@ -51,9 +52,14 @@ footer#copyright {
 	}
 }
 @include mq($from: tablet) {
-	header#search > input {
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
+	header#search {
+		&> input {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+		&> button {
+			margin-left: -2em;
+		}
 	}
 	footer#copyright > q {
 		display: inline;

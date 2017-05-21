@@ -1,6 +1,6 @@
 <header id="search" class="o-layout--center u-padding-right-large u-padding-left-large u-padding-top-medium u-padding-bottom-medium">
-    <input class="u-1/1 u-1/2@tablet u-padding-left-medium u-padding-right-large" type="search" placeholder="Search for artist or album title">
-    <button class="u-padding-left-medium u-padding-right-medium" type="button">SEARCH</button>
+    <input class="u-1/1 u-1/2@tablet u-padding-left-medium u-padding-right-large" type="search" placeholder="Search for artist or album title" ng-model="searchVal">
+    <button class="u-padding-left-medium u-padding-right-medium" type="button" ng-click="PageCtrl.search()">SEARCH</button>
 </header>
 <main id="results" class="o-layout--flexbox-vertical-full">
     <section id="results_landing" class="o-layout--center u-visible__tablet">

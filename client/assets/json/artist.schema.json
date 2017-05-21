@@ -1,0 +1,68 @@
+{
+  "title": "album",
+  "version": 0,
+  "description": "describes a spotify api search album result",
+  "type": "object",
+  "properties": {
+    "external_urls": {
+      "type": "object",
+      "properties": {
+        "spotify": "string"
+      }
+    },
+    "followers": {
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "total": {
+          "type": "number"
+        }
+      }
+    },
+    "genres": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": "string"
+      }
+    },
+    "href": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "popularity": {
+      "type": "number"
+    },
+    "type": {
+      "type": "string"
+    },
+    "uri": {
+      "type": "string"
+    }
+  }
+}

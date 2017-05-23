@@ -7,6 +7,8 @@ import routes from "./routes";
 
 import "./services/spotify";
 
+import "./components/mediaitem";
+
 import "./pages/landing";
 import "./pages/search";
 

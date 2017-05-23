@@ -3,15 +3,14 @@
     <button class="u-padding-left-medium u-padding-right-medium" type="button" ng-click="PageCtrl.search()">SEARCH</button>
 </header>
 <main id="results" class="o-layout--flexbox-vertical-full">
-    <section id="results_landing" class="o-layout--center u-visible__tablet">
+    <section ng-if="!initialized" id="results_landing" class="o-layout--center u-visible__tablet">
     	<img src="../assets/images/magnify_1x.png">
     	<h3 class="u-margin-top-large">Your results will appear here</h3>
     </section>
-    <!--
-    <div /*ng-if="state-params"*/>
-    	Liste von Ergebniskomponenten
-    </div>
-    -->
+    <section ng-if="initialized" id="results_box" class="o-wrapper-huge o-layout--flexbox-horizontal-wrapping">
+    	<mediaitem ng-repeat="model in collection track by model.id">
+        </mediaitem>
+    </section>
 </main>
 <footer id="copyright" class="o-layout--center u-padding-top-medium u-padding-bottom-medium">
 	<q>Designed by Geek Label</q>

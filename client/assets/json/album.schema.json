@@ -11,12 +11,15 @@
       "type": "array",
       "uniqueItems": true,
       "item": {
-        "type": "object",
+        "type": ["object", "null"],
+        "disableKeyCompression": true,
         "properties": {
           "external_urls": {
-            "type": "object",
+            "type": ["object", "null"],
+            "disableKeyCompression": true,
             "properties": {
-              "type": "string"
+              "type": ["string", "null"],
+              "disableKeyCompression": true
             }
           },
           "href": {
@@ -54,13 +57,15 @@
       "type": "string"
     },
     "id": {
-      "type": "string"
+      "type": "string",
+      "primary": true
     },
     "images": {
       "type": "array",
       "uniqueItems": true,
       "item": {
-        "type": "object",
+        "type": ["object", "null"],
+        "disableKeyCompression": true,
         "properties": {
           "height": {
             "type": "number"

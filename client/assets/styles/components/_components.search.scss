@@ -22,8 +22,57 @@ main#results {
 			color: grey;
 		}
 	}
-	&> secion#results_box {
-		
+	&> section#results_box {
+		overflow-y: auto;
+		&> article {
+			position: relative;
+			width: 256px;
+			height: 306px;
+			border-radius: 5px;
+			box-shadow: 0 10px 15px 5px rgb(51, 52, 65);
+			&> section:nth-child(1) {
+				height: 256px;
+				width: 256px;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				border-top-right-radius: 5px;
+				border-top-left-radius: 5px;
+				transition: all 250ms linear;
+				&:hover {
+					filter: blur(7px);
+					opacity: .5;
+					&~ section:nth-child(3) {
+						opacity: 1 !important;
+					}
+				}
+			}
+			&> section:nth-child(2) {
+				position: relative;
+				background-color: white;
+				height: 50px;
+				width: 256px;
+				border-bottom-right-radius: 5px;
+				border-bottom-left-radius: 5px;
+				color: rgb(51, 52, 65);
+				&> h5 {
+					width: auto;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+			&> section:nth-child(3) {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+				opacity: 0;
+				transition: opacity 250ms linear;
+				pointer-events: none;
+				text-align: center;
+			}
+		}
 	}
 }
 footer#copyright {

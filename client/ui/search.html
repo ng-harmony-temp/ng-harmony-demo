@@ -1,6 +1,6 @@
 <header id="search" class="o-layout--center u-padding-right-huge u-padding-left-huge u-padding-top-medium u-padding-bottom-medium">
     <input class="u-1/1 u-1/2@tablet u-padding-left-medium u-padding-right-large" type="search" placeholder="Search for artist or album title" ng-model="searchVal">
-    <button class="u-padding-left-medium u-padding-right-medium" type="button" ng-click="PageCtrl.search()">SEARCH</button>
+    <button class="u-padding-left-medium u-padding-right-medium" ng-click="PageCtrl.search()">SEARCH</button>
 </header>
 <main id="results" class="o-layout--flexbox-vertical-full u-maring-bottom-large">
     <section ng-if="!initialized" id="results_landing" class="o-layout--center u-visible__tablet">
@@ -11,7 +11,7 @@
     	<mediaitem ng-repeat="model in collection track by model.id">
         </mediaitem>
         <section id="showmemore" ng-if="initialized" class="o-layout--center u-padding-bottom-medium u-padding-top-small">
-            <button class="u-padding-left-medium u-padding-right-medium" type="button" ng-click="PageCtrl.increaseLimit()">SHOW MORE</button>    
+            <button class="u-padding-left-medium u-padding-right-medium">SHOW MORE</button>    
         </section>
     </section>
 </main>

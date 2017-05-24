@@ -1,8 +1,16 @@
-#designer-logo, #powered-by, #hero-unit, #start {
+#designer-logo, #powered-by, #hero-unit {
     position: absolute;
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+#start {
+    position: absolute;
+    &> a {
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 }
 #powered-by {
     display: inline;
@@ -12,6 +20,9 @@
 #start {
     bottom: 0;
     width: 100%;
+    &> a {
+        display: inline-block;
+    }
 }
 
 @include mq($until: tablet) {
@@ -27,7 +38,7 @@
         height: calc(100% - 80px);
         background-image: url("../../assets/images/hero-img_1x.png");
     }
-    #start {
+    #start > a{
         background-image: url("../../assets/images/page1_1x.png");
         height: 32px;
         width: 32px;
@@ -46,7 +57,7 @@
         height: calc(100% - 142px);
         background-image: url("../../assets/images/hero-img_2x.png");
     }
-    #start {
+    #start > a {
         background-image: url("../../assets/images/page1_2x.png");
         height: 64px;
         width: 64px;

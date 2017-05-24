@@ -131,8 +131,8 @@
 @import "node_modules/inuitcss/objects/objects.crop";
 @import "node_modules/inuitcss/objects/objects.tables";
 @import "node_modules/inuitcss/objects/objects.pack";
-
-
+@import "objects/objects.dimensions";
+@import "objects/objects.layout";
 
 
 
@@ -141,7 +141,8 @@
 // Build and include your project’s UI Compoments here.
 @import "components/components.buttons";
 @import "components/components.responsive-images";
-
+@import "components/components.search";
+@import "components/components.pages";
 
 
 
@@ -156,3 +157,6 @@ $inuit-offsets: true;
 //@import "node_modules/inuitcss/utilities/utilities.responsive-spacings";
 @import "node_modules/inuitcss/utilities/utilities.print";
 @import "node_modules/inuitcss/utilities/utilities.hide";
+@import "utilities/utilities.spacing";
+@import "utilities/utilities.hide";
+@import "utilities/utilities.helpers";

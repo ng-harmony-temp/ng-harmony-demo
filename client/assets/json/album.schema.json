@@ -1,0 +1,92 @@
+{
+  "title": "album",
+  "version": 0,
+  "description": "describes a spotify api search album result",
+  "type": "object",
+  "properties": {
+    "album_type": {
+      "type": "string"
+    },
+    "artists": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": ["object", "null"],
+        "disableKeyCompression": true,
+        "properties": {
+          "external_urls": {
+            "type": ["object", "null"],
+            "disableKeyCompression": true,
+            "properties": {
+              "type": ["string", "null"],
+              "disableKeyCompression": true
+            }
+          },
+          "href": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "available_markets": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": "string"
+      }
+    },
+    "external_urls": {
+      "type": "object",
+      "properties": {
+        "spotify": "string"
+      }
+    },
+    "href": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "primary": true
+    },
+    "images": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": ["object", "null"],
+        "disableKeyCompression": true,
+        "properties": {
+          "height": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "uri": {
+      "type": "string"
+    }
+  }
+}

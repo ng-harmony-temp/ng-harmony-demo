@@ -4,4 +4,14 @@ html, body {
     height: 100%;
     font-family: "Raleway";
     color: white;
+    overflow: hidden;
 }
+input {
+	border-radius: 48px;
+	border: 5px solid white;
+	line-height: 48px;
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+button { outline: none; }

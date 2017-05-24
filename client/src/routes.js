@@ -8,7 +8,10 @@ var routes = {
     },
     "/search": {
         controller: "SearchPageCtrl",
-        template: SearchPageTpl
+        template: SearchPageTpl,
+        resolve: {
+        	observables: ["SpotifyService", (SpotifyService) => { return SpotifyService.initialized.promise; }]
+        }
     }
 };
 

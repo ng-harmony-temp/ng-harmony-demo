@@ -4,65 +4,89 @@ import { Controller } from "ng-harmony-decorator";
 @Controller({
 	module: "compucorp",
 	name: "SearchPageCtrl",
-	deps: "SpotifyService",
+	deps: ["SpotifyService", "$timeout"],
 	controllerAs: "PageCtrl"
 })
 export class SearchPageCtrl extends Ctrl {
     constructor (...args) {
         super(...args);
 
-        this.$scope.initialized = false;;
         this.$scope.collection = [];
         this.$scope.searchVal = "";
+        this.$scope.initialized = false;
+        this.$scope.limit = 20;
 
         this.SpotifyService.subscribeArtists(this.onArtistsChange.bind(this));
         this.SpotifyService.subscribeAlbums(this.onAlbumsChange.bind(this));
     }
     $search () {
-    	if (this.$scope.initialized == false) {
-    		this.getCache();
-    		this.$scope.initialized = true;
+    	this.$scope.limit = 20;
+		this.$scope.collection.splice(0, this.$scope.collection.length);
+    	this.$scope.initialized = false;
+    	this._digest();
+		this.$timeout(this._search.bind(this), 100);
+	}
+	$more() {
+		this.$scope.limit += 20;
+		if (this.$scope.collection.length < this.$scope.limit) {
+			this.SpotifyService.search(encodeURI(this.$scope.searchVal), this.$scope.collection.length.toString());
 		}
+	}
+	_search () {
+   		this.getCache(this.$scope.searchVal);
 		this.SpotifyService.search(encodeURI(this.$scope.searchVal));
     }
-    async getCache () {
-    	let cachedAlbums = await this.SpotifyService.localAlbumSearch(this.$scope.searchVal);
-    	let cachedArtists = await this.SpotifyService.localArtistSearch(this.$scope.searchVal);
+    async getCache(q) {
+    	let cachedAlbums = await this.SpotifyService.localAlbumSearch(q);
+    	let cachedAlbumsByArtist = await this.SpotifyService.localAlbumByArtistSearch(q);
+    	let cachedArtists = await this.SpotifyService.localArtistSearch(q);
 
-    	cachedAlbums.forEach((album) => {
+    	cachedAlbums && cachedAlbums.forEach((album) => {
     		this._addSearchResult(album, "View Album", "album");
     	});
-    	cachedArtists.forEach((artist) => {
+    	cachedAlbumsByArtist && cachedAlbumsByArtist.forEach((album) => {
+    		this._addSearchResult(album, "View Album", "album");
+    	})
+    	cachedArtists && cachedArtists.forEach((artist) => {
     		this._addSearchResult(artist, "View Tracks", "artist");
     	});
     }
     _onChange (doc, actionText, type) {
-	    if (doc.data.op == "UPDATE") {
-    		let exists = this.$scope.collection.filter((doc) => {
-    			doc.id == doc.data.doc;
-    		});
-    		if (exists.length > 0) {
-	    		exists.map((doc) => {
-	    			doc.title = doc.data.v.name;
-	    			doc.img = doc.data.v.images[1] ? doc.data.v.images[1].url : "";
-	    			doc.type = type;
+    	if (doc.data.op == "UPDATE") {
+    		let c = this.$scope.collection.filter((d) => {
+    			return d.id == doc.data.doc;
+    		})
+    		if (c.length > 0) { 
+	    			c.map((d) => {
+	    			d.title = doc.data.v.title;
+	    			d.img = doc.data.v.images[1] ? doc.data.v.images[1].url : ""
 	    		});
-    		} else {
-    		this._addSearchResult(doc.data.v, actionText, type);
     		}
-    	} else if (doc.data.op = "INSERT") {
+    		else {
+    			this._addSearchResult(doc.data.v, actionText, type);
+    			return;
+    		}
+    		this.$scope.initialized = true;
+    		this._digest();
+    	}
+    	else if (doc.data.op == "INSERT") {
     		this._addSearchResult(doc.data.v, actionText, type);
     	}
-
     }
     _addSearchResult (doc, actionText, type) {
-    	this.$scope.collection.push({
-			id: doc.id,
-			title: doc.name,
-			actionText: actionText,
-			img: doc.images[1] ? doc.images[1].url : "",
-			type: type
-		});
+    	if (this.$scope.collection.filter((_doc) => {
+    		return _doc.id == doc.id;
+    	}).length === 0) {
+	    	this.$scope.collection.push({
+				id: doc.id,
+				title: doc.name,
+				actionText: actionText,
+				img: doc.images[1] ? doc.images[1].url : "",
+				type: type
+			});
+			this.$scope.initialized = true;
+			this._digest();
+		}
     }
     onAlbumsChange (doc) {
     	this._onChange(doc, "View Album", "album");

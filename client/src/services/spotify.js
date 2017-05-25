@@ -28,46 +28,67 @@ export class SpotifyService extends Srvc {
 			adapter: "idb",           // <- storage-adapter
 			multiInstance: false         // <- multiInstance (default: true)
 		});
-		this.artists = await this.db.collection({
-			name: "artist",
+		await this.db.collection({
+			name: "artists",
 			schema: ArtistSchema
 		});
-		this.albums = await this.db.collection({
-			name: "album",
+		await this.db.collection({
+			name: "albums",
 			schema: AlbumSchema
 		});
 		this.initialized.resolve();
 	}
-	async _search (q) {
-		let localAlbums = await this.localAlbumSearch(q);
-		let localArtists = await this.localArtistSearch(q);
-		let offset = localArtists > localAlbums ? localArtists.length.toString() : localAlbums.length.toString();
-		//this.log(`Offset is ${offset} ...`);
-		return this.$http.get(`https://api.spotify.com/v1/search?q="${q}"&type=album,artist&offset=${offset}`);
+	async _search (q, offset) {
+		let suffix = offset ? `&offset=${offset}` : "";
+		return this.$http.get(`https://api.spotify.com/v1/search?q="${q}"&type=album,artist${suffix}`);
 	}
 	localAlbumSearch (q) {
-		return this.albums.find()
-			.where({ "name": new RegExp(`.*${q}.*`, "i") })
+		this.db.albums._queryCache.destroy();
+		return this.db.albums
+			.find()
+			.where("name")
+			.regex(new RegExp(q, "i"))
 			.exec();
+	}
+	async localAlbumByArtistSearch (q) {
+		this.db.albums._queryCache.destroy();
+		let regex = new RegExp(q, "i");
+		let all = await this.db.albums
+			.find()
+			.exec();
+		//seems to be no way yet to do this in a query
+		return all.filter((album) => {
+			let truthy = false;
+			album.artists.forEach((artist) => {
+				if (regex.test(artist.name)) {
+					truthy = true;
+					return false;
+				}
+			})
+			return truthy;
+		});
 	}
 	localArtistSearch (q) {
-		return this.artists.find()
-			.where({ "name": new RegExp(`.*${q}.*`, "i") })
+		this.db.artists._queryCache.destroy();
+		return this.db.artists
+			.find()
+			.where("name")
+			.regex(new RegExp(q, "i"))
 			.exec();
 	}
-	async search (q) {
-		let results = await this._search(q);
+	async search (q, offset = null) {
+		let results = await this._search(q, offset);
 		results.data.albums.items.forEach((doc) => {
-			this.albums.upsert(doc);
+			this.db.albums.upsert(doc);
 		});
 		results.data.artists.items.forEach((doc) => {
-			this.artists.upsert(doc);
+			this.db.artists.upsert(doc);
 		});
 	}
 	subscribeArtists (observer) {
-		this.artists.$.subscribe(observer);
+		this.db.artists.$.subscribe(observer);
 	}
 	subscribeAlbums (observer) {
-		this.albums.$.subscribe(observer);
+		this.db.albums.$.subscribe(observer);
 	}
 }

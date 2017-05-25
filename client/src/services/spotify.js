@@ -38,8 +38,9 @@ export class SpotifyService extends Srvc {
 		});
 		this.initialized.resolve();
 	}
-	async _search (q) {
-		return this.$http.get(`https://api.spotify.com/v1/search?q="${q}"&type=album,artist`);
+	async _search (q, offset) {
+		let suffix = offset ? `&offset=${offset}` : "";
+		return this.$http.get(`https://api.spotify.com/v1/search?q="${q}"&type=album,artist${suffix}`);
 	}
 	localAlbumSearch (q) {
 		this.db.albums._queryCache.destroy();
@@ -49,6 +50,24 @@ export class SpotifyService extends Srvc {
 			.regex(new RegExp(q, "i"))
 			.exec();
 	}
+	async localAlbumByArtistSearch (q) {
+		this.db.albums._queryCache.destroy();
+		let regex = new RegExp(q, "i");
+		let all = await this.db.albums
+			.find()
+			.exec();
+		//seems to be no way yet to do this in a query
+		return all.filter((album) => {
+			let truthy = false;
+			album.artists.forEach((artist) => {
+				if (regex.test(artist.name)) {
+					truthy = true;
+					return false;
+				}
+			})
+			return truthy;
+		});
+	}
 	localArtistSearch (q) {
 		this.db.artists._queryCache.destroy();
 		return this.db.artists
@@ -57,8 +76,8 @@ export class SpotifyService extends Srvc {
 			.regex(new RegExp(q, "i"))
 			.exec();
 	}
-	async search (q) {
-		let results = await this._search(q);
+	async search (q, offset = null) {
+		let results = await this._search(q, offset);
 		results.data.albums.items.forEach((doc) => {
 			this.db.albums.upsert(doc);
 		});

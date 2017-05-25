@@ -8,10 +8,10 @@
     	<h3 class="u-margin-top-large">Your results will appear here</h3>
     </section>
     <section ng-if="initialized" id="results_box" class="o-layout--flexbox-horizontal-wrapping u-padding-left-huge u-padding-right-huge u-padding-top-medium u-padding-bottom-medium">
-    	<mediaitem ng-repeat="model in collection track by model.id">
+    	<mediaitem ng-repeat="(i, model) in collection | orderBy:'title' | limitTo:limit as tailoredCollection track by model.id">
         </mediaitem>
         <section id="showmemore" ng-if="initialized" class="o-layout--center u-padding-bottom-medium u-padding-top-small">
-            <button class="u-padding-left-medium u-padding-right-medium">SHOW MORE</button>    
+            <button class="u-padding-left-medium u-padding-right-medium" ng-click="PageCtrl.more()">SHOW MORE</button>    
         </section>
     </section>
 </main>

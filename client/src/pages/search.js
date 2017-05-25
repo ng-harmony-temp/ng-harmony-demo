@@ -26,17 +26,27 @@ export class SearchPageCtrl extends Ctrl {
     	this._digest();
 		this.$timeout(this._search.bind(this), 100);
 	}
+	$more() {
+		this.$scope.limit += 20;
+		if (this.$scope.collection.length < this.$scope.limit) {
+			this.SpotifyService.search(encodeURI(this.$scope.searchVal), this.$scope.collection.length.toString());
+		}
+	}
 	_search () {
    		this.getCache(this.$scope.searchVal);
 		this.SpotifyService.search(encodeURI(this.$scope.searchVal));
     }
     async getCache(q) {
     	let cachedAlbums = await this.SpotifyService.localAlbumSearch(q);
+    	let cachedAlbumsByArtist = await this.SpotifyService.localAlbumByArtistSearch(q);
     	let cachedArtists = await this.SpotifyService.localArtistSearch(q);
 
     	cachedAlbums && cachedAlbums.forEach((album) => {
     		this._addSearchResult(album, "View Album", "album");
     	});
+    	cachedAlbumsByArtist && cachedAlbumsByArtist.forEach((album) => {
+    		this._addSearchResult(album, "View Album", "album");
+    	})
     	cachedArtists && cachedArtists.forEach((artist) => {
     		this._addSearchResult(artist, "View Tracks", "artist");
     	});
@@ -46,7 +56,7 @@ export class SearchPageCtrl extends Ctrl {
     		let c = this.$scope.collection.filter((d) => {
     			return d.id == doc.data.doc;
     		})
-    		if (c.length) { 
+    		if (c.length > 0) { 
 	    			c.map((d) => {
 	    			d.title = doc.data.v.title;
 	    			d.img = doc.data.v.images[1] ? doc.data.v.images[1].url : ""
@@ -64,15 +74,19 @@ export class SearchPageCtrl extends Ctrl {
     	}
     }
     _addSearchResult (doc, actionText, type) {
-    	this.$scope.collection.push({
-			id: doc.id,
-			title: doc.name,
-			actionText: actionText,
-			img: doc.images[1] ? doc.images[1].url : "",
-			type: type
-		});
-		this.$scope.initialized = true;
-		this._digest();
+    	if (this.$scope.collection.filter((_doc) => {
+    		return _doc.id == doc.id;
+    	}).length === 0) {
+	    	this.$scope.collection.push({
+				id: doc.id,
+				title: doc.name,
+				actionText: actionText,
+				img: doc.images[1] ? doc.images[1].url : "",
+				type: type
+			});
+			this.$scope.initialized = true;
+			this._digest();
+		}
     }
     onAlbumsChange (doc) {
     	this._onChange(doc, "View Album", "album");

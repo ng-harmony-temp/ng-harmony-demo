@@ -1,13 +1,13 @@
-<article class="o-media__phone u-margin-left-small u-margin-right-small u-margin-top-medium u-margin-bottom-medium">
-	<section style="background-image: url({{model.img}});" class="o-layout--center@tablet o-media__img">
+<article class="u-margin-left-small u-margin-right-small u-margin-top-medium u-margin-bottom-medium">
+	<section ng-style="{'background-image': 'url(' + model.img[clientIsPhone ? 'small' : 'large'] + ') '};" class="o-layout--center@tablet o-media__img">
 	</section>
 	<section class="u-padding-small o-media__body">
 		<h5>{{model.title}}</h5>
 	</section>
-	<section class="tablet-only">
+	<section>
 		<img class="view-art-details--icon" src="../assets/images/bitmap_1x.png"/>
 		<h6 class="view-art-details--text">{{model.actionText}}</h6>
 	</section>
-	<section class="o-media__img-icon view-type-icon {{model.type}}">
+	<section class="view-type-icon {{model.type}}">
 	</section>
 </article>

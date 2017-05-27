@@ -1,42 +1,28 @@
 {
-  "title": "album",
+  "title": "artist",
   "version": 0,
-  "description": "describes a spotify api search album result",
+  "description": "describes a spotify api search artist result",
   "type": "object",
   "properties": {
-    "album_type": {
-      "type": "string"
-    },
+    "album_type": "string",
     "artists": {
       "type": "array",
       "uniqueItems": true,
       "item": {
-        "type": ["object", "null"],
+        "type": "object",
         "disableKeyCompression": true,
         "properties": {
           "external_urls": {
             "type": ["object", "null"],
-            "disableKeyCompression": true,
             "properties": {
-              "type": ["string", "null"],
-              "disableKeyCompression": true
+              "spotify": "string"
             }
           },
-          "href": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "uri": {
-            "type": "string"
-          }
+          "href": ["string", "null"],
+          "id": "string",
+          "name": "string",
+          "type": "string",
+          "uri": "string"
         }
       }
     },
@@ -44,11 +30,12 @@
       "type": "array",
       "uniqueItems": false,
       "item": {
-        "type": "string"
+        "type": ["string", "null"]
       }
     },
     "external_urls": {
-      "type": "object",
+      "type": ["object", "null"],
+      "disableKeyCompression": true,
       "properties": {
         "spotify": "string"
       }
@@ -82,11 +69,7 @@
     "name": {
       "type": "string"
     },
-    "type": {
-      "type": "string"
-    },
-    "uri": {
-      "type": "string"
-    }
+    "type": "string",
+    "uri": "string"
   }
 }

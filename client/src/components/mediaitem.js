@@ -1,6 +1,9 @@
-import { Controller, Component } from "ng-harmony-decorator";
-import { EventedController as EvCtrl } from "ng-harmony-controller";
+import { Logging, Controller, Component, Evented } from "ng-harmony-decorator";
+import { EventedController } from "ng-harmony-controller";
+
 import MediaItemTpl from "../../ui/mediaitem.html";
+
+import Config from "../../assets/json/config.global.json";
 
 @Component({
 	module: "compucorp",
@@ -14,12 +17,32 @@ import MediaItemTpl from "../../ui/mediaitem.html";
 	module: "compucorp",
 	name: "MediaItemCtrl",
 	controllerAs: "MediaItem",
-	deps: []
+	scope: {
+		model: "@",
+		type: "@"
+	}
 })
-export class MediaItemCtrl extends EvCtrl {
-	constructor (...args) {
+@Logging({
+	loggerName: "MediaItemLogger",
+	...Config
+})
+export class MediaItemCtrl extends EventedController {
+	constructor(...args) {
 		super(...args);
+		this.$scope.albumcardVisible = false;
+		this.$scope.artistcardVisible = false;
+	}
 
-
+	@Evented({
+		selector: "section.bg-image-n--mediaitem",
+		type: "click",
+		delegate: null
+	})
+	openCard () {
+		this.$scope[`${this.$scope.type}cardVisible`] = true;
+		this.log({
+			msg: `show ${this.$scope.type} card`,
+			level: "info"
+		});
 	}
 }

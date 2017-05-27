@@ -1,5 +1,5 @@
 <article class="u-margin-left-small u-margin-right-small u-margin-top-medium u-margin-bottom-medium">
-	<section ng-style="{'background-image': 'url(' + model.img[clientIsPhone ? 'small' : 'large'] + ') '};" class="o-layout--center@tablet o-media__img">
+	<section ng-style="{'background-image': 'url(' + model.img[clientIsPhone ? 'small' : 'large'] + ') '}" class="bg-image-n--mediaitem o-layout--center@tablet o-media__img">
 	</section>
 	<section class="u-padding-small o-media__body">
 		<h5>{{model.title}}</h5>
@@ -9,5 +9,9 @@
 		<h6 class="view-art-details--text">{{model.actionText}}</h6>
 	</section>
 	<section class="view-type-icon {{model.type}}">
+	</section>
+	<section ng-if="artistcardVisible" artistcard id={{model}}>
+	</section>
+	<section ng-if="albumcardVisible" albumcard id="{{model}}">
 	</section>
 </article>

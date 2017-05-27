@@ -18,7 +18,7 @@ export class SearchPageCtrl extends Ctrl {
 
         this.screenSize.rules = {
         	desktop: '(min-width: 740px)'
-        }
+        };
 
 		this.$scope.clientIsPhone = !this.screenSize.is("desktop");
 		this.screenSize.on("desktop", (truthy) => { 
@@ -73,7 +73,8 @@ export class SearchPageCtrl extends Ctrl {
 	    			d.title = doc.data.v.name;
 	    			d.img = {
 	    				small: doc.data.v.images[2] ? doc.data.v.images[2].url : "",
-	    				large: doc.data.v.images[1] ? doc.data.v.images[1].url : ""
+	    				large: doc.data.v.images[1] ? doc.data.v.images[1].url : "",
+	    				huge: doc.data.v.images[0] ? doc.data.v.images[0].url : ""
 	    			}
 	    		});
     		}
@@ -98,7 +99,8 @@ export class SearchPageCtrl extends Ctrl {
 				actionText: actionText,
 				img: {
     				small: doc.images[2] ? doc.images[2].url : "",
-    				large: doc.images[1] ? doc.images[1].url : ""
+    				large: doc.images[1] ? doc.images[1].url : "",
+    				huge: doc.images[0] ? doc.images[0].url : ""
     			},
 				type: type
 			});

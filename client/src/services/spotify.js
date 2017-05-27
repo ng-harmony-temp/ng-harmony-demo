@@ -4,6 +4,8 @@ import { Log } from "ng-harmony-log";
 
 import * as ArtistSchema from "../../assets/json/artist.schema.json";
 import * as AlbumSchema from "../../assets/json/album.schema.json";
+import * as DiscographySchema from "../../assets/json/discography.schema.json";
+import * as TracksSchema from "../../assets/json/tracks.schema.json";
 
 import * as Rx from "rxjs";
 import * as RxDB from "rxdb";
@@ -35,6 +37,14 @@ export class SpotifyService extends Srvc {
 		await this.db.collection({
 			name: "albums",
 			schema: AlbumSchema
+		});
+		await this.db.collection({
+			name: "discographies",
+			schema: DiscographySchema
+		});
+		await this.db.collection({
+			name: "tracks",
+			schema: TracksSchema
 		});
 		this.initialized.resolve();
 	}
@@ -68,6 +78,15 @@ export class SpotifyService extends Srvc {
 			return truthy;
 		});
 	}
+	localAlbumsByArtistSearch (id) {
+		this.db.discographies._queryCache.destroy();
+		return this.db.discographies
+			.find()
+			.where("artists.id")
+			.eq(id)
+			.exec();
+	}
+
 	localArtistSearch (q) {
 		this.db.artists._queryCache.destroy();
 		return this.db.artists
@@ -84,6 +103,18 @@ export class SpotifyService extends Srvc {
 		results.data.artists.items.forEach((doc) => {
 			this.db.artists.upsert(doc);
 		});
+	}
+	async searchDiscography (id) {
+		let results = await this.$http.get(`https://api.spotify.com/v1/artists/${id}/albums?limit=50`);
+		results.items.forEach((doc) => {
+			this.db.discographies.upsert(doc);
+		});
+	}
+	async searchTracks (id) {
+		let results = await this.$http.get(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`);
+		results.items.forEach((doc) => {
+			this.db.tracks.upsert(doc);
+		})
 	}
 	subscribeArtists (observer) {
 		this.db.artists.$.subscribe(observer);

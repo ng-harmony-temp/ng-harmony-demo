@@ -1,6 +1,6 @@
 {
   "name": "compucorp",
-  "version": "0.0.1",
+  "version": "0.6.0",
   "description": "A quick demo for compucorp on using AngularJS n SpotifyAPI",
   "main": "index.js",
   "scripts": {
@@ -58,10 +58,10 @@
     "angular-route": "^1.6.4",
     "babel-polyfill": "^6.23.0",
     "inuitcss": "^6.0.0-beta.4",
-    "ng-harmony-controller": "^0.0.5",
-    "ng-harmony-core": "github:ng-harmony/ng-harmony-core",
-    "ng-harmony-decorator": "^0.3.13",
-    "ng-harmony-log": "^0.1.7",
+    "ng-harmony-controller": "0.0.10",
+    "ng-harmony-core": "^0.1.10",
+    "ng-harmony-decorator": "^0.3.30",
+    "ng-harmony-log": "^0.2.5",
     "ng-harmony-model": "0.0.6",
     "ng-harmony-module": "^0.2.0",
     "ng-harmony-util": "^0.1.1",

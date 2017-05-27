@@ -1,0 +1,14 @@
+<header class="hero-item artist-img" style="background-image: url({{album.img[PageCtrl.$scope.clientIsPhone ? 'large' : 'huge']}})">
+	<span id="close-artistcard-icon"></span>
+	<h3 id="artistcard-artist-title">{{album.title}}</h3>
+</header>
+<section>
+	<h6>Tracks</h6>
+	</br>
+	<article ng-repeat="song in collection | orderBy:'nr' as orderlyList track by song.title">
+		<p class="album-specs">
+			<h4>{{song.title}}</h4>
+			<h6>{{song.duration}}</h6>
+		</p> 
+	</article>
+</section>

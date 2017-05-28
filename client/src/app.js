@@ -8,6 +8,8 @@ import routes from "./routes";
 import "./services/spotify";
 
 import "./components/mediaitem";
+import "./components/artistcard";
+import "./components/albumcard";
 
 import "./pages/landing";
 import "./pages/search";

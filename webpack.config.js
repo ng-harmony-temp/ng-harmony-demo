@@ -52,5 +52,12 @@ module.exports = {
             test: /\.(eot|svg|ttf|woff|woff2)$/,
             loader: "file-loader?name=dist/fonts/[name].[ext]"
         }]
-    }
+    },
+    resolve: {
+        mainFields: ["browser", "module", "main"]
+    },
+    externals: {
+        fs: '{}'
+    },
+    cache: false
 };

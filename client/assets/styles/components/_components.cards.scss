@@ -1,0 +1,133 @@
+section[artistcard], section[albumcard] {
+	position: fixed;
+	top: #{2 * $inuit-global-spacing-unit-medium + 58px};
+	left: 0;
+	width: 100%;
+	height: calc(100% - #{2 * $inuit-global-spacing-unit-medium + 58px} - 72px);
+	z-index: 99;
+	background-color: rgba(256, 256, 256, .3);
+	overflow: auto;
+	&> header {
+		position: relative;
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+	}
+	#close-card {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		cursor: pointer;
+		z-index: 9;
+	}
+	&> section#card-details {
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+	}
+}
+@include mq($until: tablet) {
+	section[artistcard] {
+		#card-title:before {
+			content: "Albums by";
+		}
+	}
+	section[albumcard] {
+		#card-title:before {
+			content: "Tracks by";
+		}
+	}
+	section[artistcard], section[albumcard] {
+		padding: $inuit-global-spacing-unit-medium;	
+		&> header {
+			width: 100%;
+			height: 128px;
+			padding: $inuit-global-spacing-unit-medium;
+			background: white;
+			#artist-art {
+				position: absolute;
+				width: 64px;
+				height: 64px;
+			}
+			#close-card {
+				width: 24px;
+				height: 24px;
+				background-image: url(../images/cross_dark_1x.png);
+				margin-top: $inuit-global-spacing-unit-medium;
+				margin-right: $inuit-global-spacing-unit-medium;
+			}
+			#card-title {
+				position: absolute;
+				left: 0;
+				top: $inuit-global-spacing-unit-medium;
+				margin-left: #{64px + $inuit-global-spacing-unit-medium + $inuit-global-spacing-unit-small};
+				color: $font-color__accent;
+				width: auto;
+				&:before {
+					display: block;
+					font-family: $font__light;
+				}
+			}
+		}
+		&> section#card-details {
+			background-color: white;
+			h4, h6 { color: $font-color__accent; }
+			#album-specs > h6, #album-details > h6 { 
+				margin-top: -$inuit-global-spacing-unit-tiny;
+				font-family: $font__light; 
+			}
+			#artistcard-details {
+				@include inuit-clearfix();
+				#album-cover {
+					float: left;
+				}
+				#album-details {
+					width: auto;
+					white-space: normal;
+				}
+			}
+		}
+	}
+}
+@include mq($from: tablet) {
+	section[artistcard], section[albumcard] {
+		padding: $inuit-global-spacing-unit-medium calc(50% - 320px);	
+		&> header {
+			width: 100%;
+			height: 300px;
+			#close-card {
+				width: 64px;
+				height: 64px;
+				background-image: url(../images/cross_2x.png);
+			}
+			#card-title {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				margin: $inuit-global-spacing-unit-medium;
+				text-shadow: 0 0 2px $font-color__accent;
+			}
+		}
+		&> section#card-details {
+			background-color: white;
+			h4, h6 { color: $font-color__accent; }
+			#album-specs > h6, #album-details > h6 { 
+				margin-top: -$inuit-global-spacing-unit-tiny;
+				font-family: $font__light; 
+			}
+			#artistcard-details {
+				@include inuit-clearfix()
+				#album-cover {
+					float: left;
+				}
+				#album-details {
+					width: auto;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+}

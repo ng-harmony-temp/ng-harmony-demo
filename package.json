@@ -1,13 +1,14 @@
 {
   "name": "compucorp",
-  "version": "0.0.1",
+  "version": "0.6.0",
   "description": "A quick demo for compucorp on using AngularJS n SpotifyAPI",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "flow": "node_modules/.bin/flow",
-    "build": "node_modules/.bin/webpack",
-    "serve": "npm run build && cp index.html ./dist/ && node_modules/.bin/http-server dist"
+    "build": "node_modules/.bin/webpack && cp index.html ./dist",
+    "serve": "node_modules/.bin/http-server dist",
+    "start": "npm run build && npm run serve"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,8 @@
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-transform-async-functions": "^6.22.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2017": "^6.24.1",
@@ -48,15 +51,23 @@
   },
   "dependencies": {
     "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-loading-bar": "^0.9.0",
+    "angular-media-queries": "^0.6.1",
     "angular-resource": "^1.6.4",
     "angular-route": "^1.6.4",
+    "babel-polyfill": "^6.23.0",
     "inuitcss": "^6.0.0-beta.4",
-    "ng-harmony-controller": "^0.0.4",
-    "ng-harmony-core": "github:ng-harmony/ng-harmony-core",
-    "ng-harmony-decorator": "^0.3.13",
-    "ng-harmony-log": "^0.1.7",
+    "ng-harmony-controller": "0.0.12",
+    "ng-harmony-core": "^0.1.10",
+    "ng-harmony-decorator": "^0.3.32",
+    "ng-harmony-log": "^0.2.6",
     "ng-harmony-model": "0.0.6",
     "ng-harmony-module": "^0.2.0",
-    "ng-harmony-util": "^0.1.1"
+    "ng-harmony-util": "^0.1.1",
+    "pouchdb-adapter-idb": "^6.2.0",
+    "rxdb": "github:ng-harmony/rxdb",
+    "rxjs": "^5.4.0",
+    "rxjs-es": "^5.0.0-beta.12"
   }
 }

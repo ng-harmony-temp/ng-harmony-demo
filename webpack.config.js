@@ -1,7 +1,7 @@
 var path = require("path");
 
 module.exports = {
-    entry: "./client/src/app.js",
+    entry: ["babel-polyfill", "./client/src/app.js"],
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "dist")
@@ -15,6 +15,7 @@ module.exports = {
                 options: {
                     presets: ["env", "es2017", "flow", "stage-0"],
                     plugins: [
+                        "transform-async-functions",
                         "transform-decorators-legacy",
                         "transform-class-properties"
                     ]
@@ -51,5 +52,12 @@ module.exports = {
             test: /\.(eot|svg|ttf|woff|woff2)$/,
             loader: "file-loader?name=dist/fonts/[name].[ext]"
         }]
-    }
+    },
+    resolve: {
+        mainFields: ["browser", "module", "main"]
+    },
+    externals: {
+        fs: '{}'
+    },
+    cache: false
 };

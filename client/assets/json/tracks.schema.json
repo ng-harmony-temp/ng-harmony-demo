@@ -1,0 +1,63 @@
+{
+  "title": "tracks",
+  "version": 0,
+  "description": "describes a spotify api search for tracks on a specific album",
+  "type": "object",
+  "properties": {
+    "albumid": {
+      "type": "string"
+    },
+    "artists": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": "object",
+        "disableKeyCompression": true,
+        "properties": {
+          "external_urls": {
+            "type": ["object", "null"],
+            "properties": {
+              "spotify": "string"
+            }
+          },
+          "href": ["string", "null"],
+          "id": "string",
+          "name": "string",
+          "type": "string",
+          "uri": "string"
+        }
+      }
+    },
+    "available_markets": {
+      "type": "array",
+      "uniqueItems": false,
+      "item": {
+        "type": ["string", "null"]
+      }
+    },
+    "disc_number": "number",
+    "duration_ms": "number",
+    "explicit": "boolean", 
+    "external_urls": {
+      "type": ["object", "null"],
+      "disableKeyCompression": true,
+      "properties": {
+        "spotify": "string"
+      }
+    },
+    "href": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "primary": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "preview_url": "string",
+    "track_number": "number",
+    "type": "string",
+    "uri": "string"
+  }
+}

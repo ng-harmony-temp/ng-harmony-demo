@@ -1,5 +1,5 @@
 header#search {
-	background-color: rgb(51, 52, 65);
+	background-color: $header-bg-color;
 	&> button {
 		border: 5px solid white;
 	}
@@ -14,22 +14,22 @@ main section#showmemore {
 main section#showmemore > button, header#search > button {
 		line-height: 48px;
 		border-radius: 48px;
-		background-color: rgb(198, 67, 120);
-		&:hover { background-color: rgb(215, 75, 130); }
-		&:active { background-color: rgb(150, 40, 70); }
+		background-color: $button-color;
+		&:hover { background-color: $button-color__hover; }
+		&:active { background-color: $button-color__click; }
 		color: white;
 }
 
 
 main#results {
-	background-color: rgb(56, 58, 73);
+	background-color: $pages-bg-color-search;
 	height: calc(100% - #{4 * $inuit-global-spacing-unit-medium} - 3em - #{$inuit-global-line-height});
 	transition: 500ms all linear;
 	&> section#results_landing {
 		transition: 200ms all linear;
 		&> h3 {
-			font-family: RalewayExtraLight; 
-			color: grey;
+			font-family: $font__light; 
+			color: $font-color__nuanced;
 		}
 	}
 	&> section#results_box {
@@ -69,7 +69,7 @@ main#results {
 footer#copyright {
 	position: absolute;
 	width: 100%;
-	background-color: rgb(51, 52, 65);
+	background-color: $footer-bg-color;
 	transition: 500ms all ease-in;
 	bottom: 0;
 }
@@ -91,7 +91,7 @@ footer#copyright {
 		&:before, &:after { content: ""; }
 	}
 	main#results {
-		background-color: rgb(51, 52, 65);
+		background-color: $pages-bg-color-search__small;
 		height: calc(100% - 180px - 96px);
 		&> section#results_box {
 			padding-left: $inuit-global-spacing-unit-small !important;
@@ -101,15 +101,16 @@ footer#copyright {
 				display: block;
 				width: auto;
 				height: 64px;
-				box-shadow: 0 5px 10px 3px rgb(51, 52, 65);
+				box-shadow: 0 5px 10px 3px $box-shadow-color__soft;
 				&:hover {
-					box-shadow: 0 5px 10px 3px rgb(198, 67, 120);
+					box-shadow: 0 5px 10px 3px $box-shadow-color__hard;
 				}
 				&> section:nth-child(1) {
 					height: 64px;
 					width: 64px;
 					margin-right: 0 !important;
 					border-bottom-left-radius: 5px;
+					cursor: pointer;
 				}
 				&> section:nth-child(2) {
 					height: 64px;
@@ -164,7 +165,7 @@ footer#copyright {
 			&> article {
 				width: 256px;
 				height: 306px;
-				box-shadow: 0 10px 15px 5px rgb(51, 52, 65);
+				box-shadow: 0 10px 15px 5px $box-shadow-color__soft;
 				&> section:nth-child(1) {
 					height: 256px;
 					width: 256px;

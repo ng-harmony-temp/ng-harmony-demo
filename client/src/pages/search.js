@@ -4,7 +4,7 @@ import { Controller } from "ng-harmony-decorator";
 @Controller({
 	module: "compucorp",
 	name: "SearchPageCtrl",
-	deps: ["SpotifyService", "$timeout"],
+	deps: ["SpotifyService", "$timeout", "screenSize"],
 	controllerAs: "PageCtrl"
 })
 export class SearchPageCtrl extends Ctrl {
@@ -15,6 +15,18 @@ export class SearchPageCtrl extends Ctrl {
         this.$scope.searchVal = "";
         this.$scope.initialized = false;
         this.$scope.limit = 20;
+
+        this.screenSize.rules = {
+        	desktop: '(min-width: 740px)'
+        };
+
+		this.$scope.clientIsPhone = !this.screenSize.is("desktop");
+		this.screenSize.on("desktop", (truthy) => { 
+			if (this.$scope.clientIsPhone === truthy) {
+				this.$scope.clientIsPhone = !truthy;
+				this._digest();
+			}
+		});
 
         this.SpotifyService.subscribeArtists(this.onArtistsChange.bind(this));
         this.SpotifyService.subscribeAlbums(this.onAlbumsChange.bind(this));
@@ -58,8 +70,12 @@ export class SearchPageCtrl extends Ctrl {
     		})
     		if (c.length > 0) { 
 	    			c.map((d) => {
-	    			d.title = doc.data.v.title;
-	    			d.img = doc.data.v.images[1] ? doc.data.v.images[1].url : ""
+	    			d.title = doc.data.v.name;
+	    			d.img = {
+	    				small: doc.data.v.images[2] ? doc.data.v.images[2].url : "",
+	    				large: doc.data.v.images[1] ? doc.data.v.images[1].url : "",
+	    				huge: doc.data.v.images[0] ? doc.data.v.images[0].url : ""
+	    			}
 	    		});
     		}
     		else {
@@ -81,7 +97,11 @@ export class SearchPageCtrl extends Ctrl {
 				id: doc.id,
 				title: doc.name,
 				actionText: actionText,
-				img: doc.images[1] ? doc.images[1].url : "",
+				img: {
+    				small: doc.images[2] ? doc.images[2].url : "",
+    				large: doc.images[1] ? doc.images[1].url : "",
+    				huge: doc.images[0] ? doc.images[0].url : ""
+    			},
 				type: type
 			});
 			this.$scope.initialized = true;

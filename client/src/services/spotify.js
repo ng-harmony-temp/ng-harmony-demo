@@ -11,10 +11,16 @@ import * as Rx from "rxjs";
 import * as RxDB from "rxdb";
 import * as Adapter from "pouchdb-adapter-idb";
 
+import Config from "../../assets/json/config.global.json";
+
 @Service({
 	module: "compucorp",
 	name: "SpotifyService",
 	deps: ["$http", "$q"]
+})
+@Logging({
+	loggerName: "SpotifyLogger",
+	...Config
 })
 export class SpotifyService extends Srvc {
 	constructor(...args) {
@@ -82,8 +88,8 @@ export class SpotifyService extends Srvc {
 		this.db.discographies._queryCache.destroy();
 		return this.db.discographies
 			.find()
-			.where("artists.id")
-			.eq(id)
+			.where("artists")
+			.elemMatch({ "id": { "$eq": id } })
 			.exec();
 	}
 
@@ -93,6 +99,14 @@ export class SpotifyService extends Srvc {
 			.find()
 			.where("name")
 			.regex(new RegExp(q, "i"))
+			.exec();
+	}
+	localTracksByAlbumSearch (id) {
+		this.db.tracks._queryCache.destroy();
+		return this.db.tracks
+			.find()
+			.where("albumid")
+			.eq(id)
 			.exec();
 	}
 	async search (q, offset = null) {
@@ -105,15 +119,18 @@ export class SpotifyService extends Srvc {
 		});
 	}
 	async searchDiscography (id) {
-		let results = await this.$http.get(`https://api.spotify.com/v1/artists/${id}/albums?limit=50`);
-		results.items.forEach((doc) => {
+		let results = await this.$http.get(`https://api.spotify.com/v1/artists/${id}/albums?limit=50`) || {};
+		results.data && results.data.items.forEach((doc) => {
 			this.db.discographies.upsert(doc);
 		});
 	}
 	async searchTracks (id) {
-		let results = await this.$http.get(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`);
-		results.items.forEach((doc) => {
-			this.db.tracks.upsert(doc);
+		let results = await this.$http.get(`https://api.spotify.com/v1/albums/${id}/tracks?limit=50`) || {};
+		results.data && results.data.items.forEach((doc) => {
+			this.db.tracks.upsert({
+				albumid: id,
+				...doc
+			});
 		})
 	}
 	subscribeArtists (observer) {
@@ -121,5 +138,11 @@ export class SpotifyService extends Srvc {
 	}
 	subscribeAlbums (observer) {
 		this.db.albums.$.subscribe(observer);
+	}
+	subscribeDiscographies (observer) {
+		this.db.discographies.$.subscribe(observer);
+	}
+	subscribeTracks (observer) {
+		this.db.tracks.$.subscribe(observer);
 	}
 }

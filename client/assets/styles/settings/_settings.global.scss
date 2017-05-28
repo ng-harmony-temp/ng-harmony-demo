@@ -25,7 +25,8 @@ $button-color__hover: lighten($button-color, 10%);//rgb(215, 75, 130);
 $button-color__click: darken($button-color, 10%);//rgb(150, 40, 70);
 
 $font-color: white;
-$font-color__accent: gray;
+$font-color__accent: $pages-bg-color-search;
+$font-color__nuanced: gray;
 
 
 $font: Raleway;

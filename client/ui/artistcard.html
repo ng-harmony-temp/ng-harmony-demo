@@ -1,15 +1,15 @@
-<header class="hero-item artist-img" style="background-image: url({{artist.img[PageCtrl.$scope.clientIsPhone ? 'large' : 'huge']}})">
-	<span id="close-artistcard-icon"></span>
-	<h3 id="artistcard-artist-title">{{artist.title}}</h3>
+<header class="hero-item artist-img" ng-style="!clientIsPhone && {'background-image': 'url(' + model.img['huge'] + ')'}">
+	<span ng-if="clientIsPhone" id="artist-art" class="u-margin-right-medium" ng-style="{'background-image': 'url(' + model.img['small'] + ') '}">&nbsp;</span>
+	<span id="close-card">&nbsp;</span>
+	<h3 id="card-title">{{model.title}}</h3>
 </header>
-<section>
-	<h6>Albums</h6>
-	</br>
-	<article ng-repeat="album in collection | orderBy:'year' as orderlyList track by album.title">
-		<img class="album-cover" ng-src="{{album.img}}"/>
-		<p class="album-specs">
+<section id="card-details" class="u-padding-small">
+	<h6 ng-if="!clientIsPhone" class="u-padding-left-tiny u-margin-bottom-medium">Albums</h6>
+	<article id="artistcard-details" class="u-padding-tiny" ng-repeat="album in albums | orderBy:'year' as orderlyList track by album.title">
+		<img ng-if="!clientIsPhone" id="album-cover" ng-src="{{album.img}}"/>
+		<section id="album-details" class="u-padding-left-small">
 			<h4>{{album.title}}</h4>
-			<h6>{{album.year}}</h6>
-		</p> 
+			<h6>Published not so long ago &#10084;</h6>
+		</section> 
 	</article>
 </section>

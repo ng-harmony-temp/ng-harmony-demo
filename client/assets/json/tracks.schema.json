@@ -4,6 +4,9 @@
   "description": "describes a spotify api search for tracks on a specific album",
   "type": "object",
   "properties": {
+    "albumid": {
+      "type": "string"
+    },
     "artists": {
       "type": "array",
       "uniqueItems": true,

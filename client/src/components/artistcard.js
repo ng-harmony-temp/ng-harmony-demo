@@ -1,6 +1,9 @@
-import { Controller, Component } from "ng-harmony-decorator";
-import { EventedController as EvCtrl } from "ng-harmony-controller";
+import { Controller, Component, Evented, Logging } from "ng-harmony-decorator";
+import { EventedController as EventedCtrl } from "ng-harmony-controller";
+
 import CardTpl from "../../ui/artistcard.html";
+
+import Config from "../../assets/json/config.global.json";
 
 @Component({
 	module: "compucorp",
@@ -14,35 +17,38 @@ import CardTpl from "../../ui/artistcard.html";
 	module: "compucorp",
 	name: "ArtistCardCtrl",
 	controllerAs: "ArtistCard",
-	deps: ["SpotifyService", "screenSize"]
+	deps: ["SpotifyService"]
 })
-export class ArtistCardCtrl extends EvCtrl {
+@Logging({
+	loggerName: "ArtistCardLogger",
+	...Config
+})
+export class ArtistCardCtrl extends EventedCtrl {
 	constructor (...args) {
 		super(...args);
 
-        this.$scope.collection = [];
-        this.$scope.initialized = false;
-        this.$scope.limit = 20;
+        this.$scope.albums = [];
 
-        this.screenSize.rules = {
-        	desktop: '(min-width: 740px)'
-        };
+        this.log({
+        	msg: "hello from artistcard",
+        	level: "info"
+        })
 
-		this.$scope.clientIsPhone = !this.screenSize.is("desktop");
-		this.screenSize.on("desktop", (truthy) => { 
-			if (this.$scope.clientIsPhone === truthy) {
-				this.$scope.clientIsPhone = !truthy;
-				this._digest();
-			}
-		});
-
-        this.SpotifyService.subscribeDiscographies(this.onDiscographyChange.bind(this));
+        this.SpotifyService.subscribeDiscographies(this._onChange.bind(this));
 
         this.search();
 	}
 	search () {
-   		this.getCache(this.$scope.id);
-		this.SpotifyService.searchDiscography(this.$scope.id);
+		this.log({
+			msg: "search",
+			level: "info"
+		});
+		this.log({
+			msg: this.$scope.model.id,
+			level: "info"
+		})
+   		this.getCache(this.$scope.model.id);
+		this.SpotifyService.searchDiscography(this.$scope.model.id);
     }
     async getCache(id) {
     	let cachedAlbums = await this.SpotifyService.localAlbumsByArtistSearch(id);
@@ -51,43 +57,60 @@ export class ArtistCardCtrl extends EvCtrl {
     		this._addSearchResult(album);
     	});
     }
-    _onChange (doc, actionText, type) {
+    _onChange (doc) {
+    	this.log({
+    		level: "info",
+    		msg: "onchange"
+    	});
     	if (doc.data.op == "UPDATE") {
-    		let c = this.$scope.collection.filter((d) => {
-    			return d.title == doc.data.v.title;
+    		let c = this.$scope.albums.filter((d) => {
+    			return d.title == doc.data.v.name;
     		})
     		if (c.length > 0) { 
     			c.map((d) => {
-	    			d.title = doc.data.v.title;
+	    			d.title = doc.data.v.name;
 	    			d.img = doc.data.v.images[2] ? doc.data.v.images[2].url : "";
 	    			d.year = doc.data.v.year;
 	    		});
     		}
     		else {
-    			this._addSearchResult(doc.data.v, actionText, type);
+    			this._addSearchResult(doc.data.v);
     			return;
     		}
     		this.$scope.initialized = true;
     		this._digest();
     	}
     	else if (doc.data.op == "INSERT") {
-    		this._addSearchResult(doc.data.v, actionText, type);
+    		this._addSearchResult(doc.data.v);
     	}
     }
     _addSearchResult (doc) {
-    	if (this.$scope.collection.filter((_doc) => {
-    		return _doc.title == doc.title;
+    	this.log({
+    		level: "info",
+    		msg: "dok received"
+    	});
+    	if (this.$scope.albums.filter((_doc) => {
+    		return _doc.title == doc.name;
     	}).length === 0) {
-	    	this.$scope.collection.push({
-				title: doc.title,
+	    	this.$scope.albums.push({
+				title: doc.name,
 				img: doc.images[2] ? doc.images[2].url : "",
 				year: doc.year
 			});
 			this._digest();
 		}
     }
-    onDiscographyChange (doc) {
-    	this._onChange(doc);
+
+    @Evented({
+    	selector: "header #close-card",
+    	type: "click",
+    	delegate: null
+    })
+    destroy () {
+    	this.log({
+    		msg: "Close",
+    		level: "info"
+    	});
     }
 
 }

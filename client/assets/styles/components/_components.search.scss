@@ -29,7 +29,7 @@ main#results {
 		transition: 200ms all linear;
 		&> h3 {
 			font-family: $font__light; 
-			color: $font-color__accent;
+			color: $font-color__nuanced;
 		}
 	}
 	&> section#results_box {
@@ -110,6 +110,7 @@ footer#copyright {
 					width: 64px;
 					margin-right: 0 !important;
 					border-bottom-left-radius: 5px;
+					cursor: pointer;
 				}
 				&> section:nth-child(2) {
 					height: 64px;

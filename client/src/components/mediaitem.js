@@ -5,6 +5,7 @@ import MediaItemTpl from "../../ui/mediaitem.html";
 
 import Config from "../../assets/json/config.global.json";
 
+
 @Component({
 	module: "compucorp",
 	selector: "mediaitem",
@@ -17,10 +18,6 @@ import Config from "../../assets/json/config.global.json";
 	module: "compucorp",
 	name: "MediaItemCtrl",
 	controllerAs: "MediaItem",
-	scope: {
-		model: "@",
-		type: "@"
-	}
 })
 @Logging({
 	loggerName: "MediaItemLogger",
@@ -31,6 +28,20 @@ export class MediaItemCtrl extends EventedController {
 		super(...args);
 		this.$scope.albumcardVisible = false;
 		this.$scope.artistcardVisible = false;
+		this.$scope.$on("change", this.handleEvent.bind(this));
+	}
+
+	handleEvent (ev, { scope, triggerFn, triggerTokens }) {
+		this.log({
+			level: "info",
+			msg: "handlingChildEvent"
+		});
+		if (scope._name.fn === "ArtistCardCtrl" && triggerTokens.type === "click") {
+			this.$scope.artistcardVisible = false;
+		} else if (scope._name.fn === "AlbumCardCtrl" && triggerTokens.type === "click") {
+			this.$scope.albumcardVisible = false;
+		}
+		this._digest();
 	}
 
 	@Evented({
@@ -39,10 +50,7 @@ export class MediaItemCtrl extends EventedController {
 		delegate: null
 	})
 	openCard () {
-		this.$scope[`${this.$scope.type}cardVisible`] = true;
-		this.log({
-			msg: `show ${this.$scope.type} card`,
-			level: "info"
-		});
+		this.$scope[`${this.$scope.model.type}cardVisible`] = true;
+		this._digest();
 	}
 }

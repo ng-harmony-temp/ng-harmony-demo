@@ -1,7 +1,5 @@
 import "../assets/styles/main.scss";
 
-import "babel-polyfill";
-
 import module from "./module";
 import routes from "./routes";
 

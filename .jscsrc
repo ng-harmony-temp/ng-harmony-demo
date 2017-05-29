@@ -8,6 +8,9 @@
     "requireTrailingComma": false,
     "requireLineFeedAtFileEnd": false,
 
+    "disallowQuotedKeysInObjects": false,
+    "disallowMultipleVarDecl": false,
+
     "excludeFiles": [
         "build/modules/**",
         "package.json",

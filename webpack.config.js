@@ -16,7 +16,7 @@ let config = {
         filename: isProd
             ? "[name].[hash].js"
             : "[name].bundle.js",
-        path: path.resolve(__dirname, "client"),
+        path: path.resolve(__dirname, "dist"),
         chunkFilename: isProd
             ? "[name].[hash].js"
             : "[name].bundle.js"

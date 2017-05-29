@@ -1,0 +1,75 @@
+{
+  "title": "artist",
+  "version": 0,
+  "description": "describes a spotify api search artist result",
+  "type": "object",
+  "properties": {
+    "album_type": "string",
+    "artists": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": "object",
+        "disableKeyCompression": true,
+        "properties": {
+          "external_urls": {
+            "type": ["object", "null"],
+            "properties": {
+              "spotify": "string"
+            }
+          },
+          "href": ["string", "null"],
+          "id": "string",
+          "name": "string",
+          "type": "string",
+          "uri": "string"
+        }
+      }
+    },
+    "available_markets": {
+      "type": "array",
+      "uniqueItems": false,
+      "item": {
+        "type": ["string", "null"]
+      }
+    },
+    "external_urls": {
+      "type": ["object", "null"],
+      "disableKeyCompression": true,
+      "properties": {
+        "spotify": "string"
+      }
+    },
+    "href": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "primary": true
+    },
+    "images": {
+      "type": "array",
+      "uniqueItems": true,
+      "item": {
+        "type": ["object", "null"],
+        "disableKeyCompression": true,
+        "properties": {
+          "height": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": "string",
+    "uri": "string"
+  }
+}

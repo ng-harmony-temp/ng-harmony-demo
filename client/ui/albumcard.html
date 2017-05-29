@@ -5,8 +5,8 @@
 </header>
 <section id="card-details" class="u-padding-small">
 	<h6 ng-if="!clientIsPhone" class="u-margin-bottom-medium">Tracks</h6>
-	<article id="albumcard-details" ng-repeat="song in tracks | orderBy:'nr' as orderlyList track by song.nr">
-		<section id="album-specs">
+	<article class="albumcard-details" ng-repeat="song in tracks | orderBy:'nr' as orderlyList track by song.nr">
+		<section class="album-specs">
 			<h4>{{song.title}}</h4>
 			<h6>{{song.duration}}</h6>
 		</section> 

@@ -6,8 +6,8 @@
 <section id="card-details" class="u-padding-small">
 	<h6 ng-if="!clientIsPhone" class="u-padding-left-tiny u-margin-bottom-medium">Albums</h6>
 	<article id="artistcard-details" class="u-padding-tiny" ng-repeat="album in albums | orderBy:'year' as orderlyList track by album.title">
-		<img ng-if="!clientIsPhone" id="album-cover" ng-src="{{album.img}}"/>
-		<section id="album-details" class="u-padding-left-small">
+		<img ng-if="!clientIsPhone" class="album-cover" ng-src="{{album.img}}"/>
+		<section class="album-details" class="u-padding-left-small">
 			<h4>{{album.title}}</h4>
 			<h6>Published not so long ago &#10084;</h6>
 		</section> 

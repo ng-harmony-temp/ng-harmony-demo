@@ -73,16 +73,16 @@ section[artistcard], section[albumcard] {
 		&> section#card-details {
 			background-color: white;
 			h4, h6 { color: $font-color__accent; }
-			#album-specs > h6, #album-details > h6 { 
+			.album-specs > h6, .album-details > h6 { 
 				margin-top: -$inuit-global-spacing-unit-tiny;
 				font-family: $font__light; 
 			}
-			#artistcard-details {
+			.artistcard-details {
 				@include inuit-clearfix();
-				#album-cover {
+				.album-cover {
 					float: left;
 				}
-				#album-details {
+				.album-details {
 					width: auto;
 					white-space: normal;
 				}
@@ -112,16 +112,16 @@ section[artistcard], section[albumcard] {
 		&> section#card-details {
 			background-color: white;
 			h4, h6 { color: $font-color__accent; }
-			#album-specs > h6, #album-details > h6 { 
+			.album-specs > h6, .album-details > h6 { 
 				margin-top: -$inuit-global-spacing-unit-tiny;
 				font-family: $font__light; 
 			}
-			#artistcard-details {
+			.artistcard-details {
 				@include inuit-clearfix()
-				#album-cover {
+				.album-cover {
 					float: left;
 				}
-				#album-details {
+				.album-details {
 					width: auto;
 					white-space: nowrap;
 					overflow: hidden;

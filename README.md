@@ -1,6 +1,18 @@
 # compucorp
 Spotify Music Search - by DI (FH) Johannes Neugschwentner aka _joehannes_
 
+# Run
+
+1.) git clone
+2.) npm i
+3.) npm start
+
+# Test
+
+1.) npm i -g karma-cli
+2.) karma start
+
+I do have an npm script to kick off karma, but on my machine it doesn't work due to a bug in karma. My suspicion is it directly goes to local karma and that somehow doesn't understand the ES.Next decorators included ...
 
 # State of the Union
 
@@ -12,10 +24,14 @@ _Design:_
 * I think it's almost and pretty pixel perfect ... There's always something wrong and usually you got comminication there and back up the pipeline ...
 
 _Tests:_
-* I'll start with protractor after finishing this README
+* A few Unit Tests only
+* To defend the poor test coverage and lack of e2d or selenium tests I got to say I was just IP-blacklisted from Spotify and can't get test data anymore.
+* I dearly hope you'll go easy on that as I really tried to provide a decent project that will do the job and get me this job :)
 
 _Build Process:_
 * Npm Scripts to kick off webpack etc ...
+* I created a gulp task as well but deleted it since I got blacklisted by Spotify and couldn't test properly anymore. My goal was to rewrite everything to literate programming with proper documentation, but I dare not do it unless I insert incomplete code or the odd bug and can't even check if that is so ...
+So I deleted the gulp task again ...
 
 _Scaffolding & Seeds:_
 * No sir, I was very brave and nice and started from scratch
@@ -64,3 +80,19 @@ _Anything else_:
 * I tested in Firefox / Chrome only ... didn't have virtual machines installed (yet) on my linux and that would have been a bit time consuming.
 
 * The build process included is an npm/webpack approach. Since I wasn't allowed to use scaffolding tools or seeds ... I chose to not spend time on writing my own gulp pipeline --- I wanted to make sure I get done
+
+* Sorting Results: In the beginning I sorted Results alphabetically, which was nice in a way: They were not only sorted alphabetically, but also it wasn't all albums first, all artists then ... But in the end this approach leads to an almost unusable result for the user when clicking the more button, since the stuff gets reordered always ... so I chose not to sort ... An approach to this could be for example: <hr> separate search results as to be visually separate entries and sort those individually ...
+
+# Possible Layout Mistakes in albumcard/artistcard
+
+* While unittesting I saw I had some html-ids in the ng-repeat directives of albumcard and artistcard ... this is a no go ...
+So flying blind, already blacklisted by Spotify, I changed them to classes.
+I dearly hope this went right and it looks good, but I can't tell as of now. (I'm a bit tired after 2.5 weeks coding this day by day and I need a day off)
+
+# Extras
+
+* I hacked and pushed to RxDB (2 bugs) along the way
+* I hacked ng-harmony along the way
+* I debugged my way through we-js-logger and bunyan in the browser
+* I helped people on the gitter channel
+* I reported an Atom bug (crashes on method decorators)

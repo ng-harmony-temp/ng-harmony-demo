@@ -21,7 +21,7 @@ export class SearchPageCtrl extends Ctrl {
         };
 
 		this.$scope.clientIsPhone = !this.screenSize.is("desktop");
-		this.screenSize.on("desktop", (truthy) => { 
+		this.screenSize.on("desktop", (truthy) => {
 			if (this.$scope.clientIsPhone === truthy) {
 				this.$scope.clientIsPhone = !truthy;
 				this._digest();
@@ -68,7 +68,7 @@ export class SearchPageCtrl extends Ctrl {
     		let c = this.$scope.collection.filter((d) => {
     			return d.id == doc.data.doc;
     		})
-    		if (c.length > 0) { 
+    		if (c.length > 0) {
 	    			c.map((d) => {
 	    			d.title = doc.data.v.name;
 	    			d.img = {

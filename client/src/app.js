@@ -19,3 +19,5 @@ module.config(($locationProvider) => {
 	$locationProvider.html5Mode(false);
 })
 module.bootstrap();
+
+export default module.name;

@@ -5,9 +5,4 @@ import { Controller } from "ng-harmony-decorator";
 	module: "compucorp",
 	name: "LandingPageCtrl"
 })
-export class LandingPageCtrl extends Ctrl {
-    constructor (...args) {
-        super(...args);
-        console.log("Landing Page initialized!");
-    }
-};
+export class LandingPageCtrl extends Ctrl {};

@@ -134,7 +134,7 @@ if (!isTest) {
 }
 
 if (isProd) {
-    config.plugins.push(new webpack.NoErrorsPlugin(), new webpack.optimize.DedupePlugin(), new webpack.optimize.UglifyJsPlugin(), new CopyWebpackPlugin([
+    config.plugins.push(new CopyWebpackPlugin([
         {
             from: __dirname + "/client"
         }
